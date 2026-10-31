@@ -1,0 +1,35 @@
+# Formatting for the generated HTML pages.
+# Edit any value and rebuild (python build.py). Sizes accept any CSS unit (rem, em, px).
+
+# Page language: used by the browser for hyphenation of justified text.
+language: pt
+
+text:
+  font_family: '"Spectral", Georgia, serif'
+  font_size: 1.2rem
+  line_height: 1.7            # spacing between lines (1 = tight, 2 = double)
+  paragraph_spacing: 1.2em    # space between paragraphs
+  first_line_indent: 0        # e.g. 1.5em for book-style paragraph indents
+  align: justify              # left | justify | center | right
+  hyphens: auto               # auto | manual | none — "auto" avoids gaps in justified text
+  letter_spacing: normal
+  max_width: 42rem            # width of the text column
+  color: "#fff"
+  background: "#000"
+
+headings:
+  font_weight: 600
+  line_height: 1.25
+  h1_size: 2.2rem
+  h2_size: 1.6rem
+  align: left
+
+# Small note shown at the end of every text. Inline markdown works (*italic*, [link](url)).
+# Leave text empty ("") to hide it.
+footer:
+  text: "Texto escrito por Theo. Todos os direitos reservados."
+  color: "#888"
+  font_size: 0.8rem
+  line_height: 1.5
+  align: left
+  margin_top: 3rem
