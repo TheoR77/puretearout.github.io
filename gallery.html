@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galeria — Pure Tearout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>:root{--text-font-family:"Spectral", Georgia, serif;--text-font-size:1.2rem;--text-line-height:1.7;--text-paragraph-spacing:1.2em;--text-first-line-indent:0;--text-align:justify;--text-hyphens:auto;--text-letter-spacing:normal;--text-max-width:42rem;--text-color:#fff;--text-background:#000;--headings-font-weight:600;--headings-line-height:1.25;--headings-h1-size:2.2rem;--headings-h2-size:1.6rem;--headings-align:left;--footer-color:#888;--footer-font-size:0.8rem;--footer-line-height:1.5;--footer-align:left;--footer-margin-top:3rem;}</style>
+</head>
+<body class="gallery-page">
+<header><a href="index.html">Pure Tearout</a></header>
+<main>
+<div class="gallery">
+<a class="back" href="index.html">← voltar</a>
+<div class="stage">
+<img class="slide" alt="">
+<span class="hint hint-left">← use as setas do teclado</span>
+<span class="hint hint-right">use as setas do teclado →</span>
+</div>
+<p class="caption"></p>
+<p class="counter"></p>
+<script>
+const images = [{"src": "gallery/SQUAD.png", "caption": "", "max_size": ""}, {"src": "gallery/SQUAD_2.png", "caption": "", "max_size": ""}, {"src": "gallery/b%26w1.jpeg", "caption": "", "max_size": ""}, {"src": "gallery/drafts.jpeg", "caption": "", "max_size": ""}, {"src": "gallery/mirroredit1.jpeg", "caption": "", "max_size": ""}, {"src": "gallery/myart_16_quadddd.png", "caption": "", "max_size": ""}, {"src": "gallery/quadrakill.png", "caption": "", "max_size": ""}, {"src": "gallery/quadrakill_v5.png", "caption": "", "max_size": ""}, {"src": "gallery/spermwhalelike.jpeg", "caption": "", "max_size": ""}, {"src": "gallery/stressguys.jpeg", "caption": "", "max_size": ""}, {"src": "gallery/turbine.png", "caption": "", "max_size": ""}, {"src": "gallery/xtraweird.png", "caption": "", "max_size": ""}, {"src": "gallery/yeah3.jpeg", "caption": "", "max_size": ""}];
+const stage = document.querySelector(".stage");
+const slide = document.querySelector(".slide");
+const caption = document.querySelector(".caption");
+const counter = document.querySelector(".counter");
+let current = 0;
+
+function show(n) {
+  current = (n + images.length) % images.length;
+  const size = images[current].max_size;
+  slide.style.maxWidth = size ? "min(100%, " + size + ")" : "";
+  slide.style.maxHeight = size ? "min(100%, " + size + ")" : "";
+  slide.src = images[current].src;
+  caption.textContent = images[current].caption;
+  counter.textContent = (current + 1) + " / " + images.length;
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") show(current - 1);
+  if (e.key === "ArrowRight") show(current + 1);
+});
+
+function edge(e) {
+  const r = stage.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width;
+  return x < 0.2 ? "left" : x > 0.8 ? "right" : "";
+}
+
+stage.addEventListener("mousemove", (e) => { stage.dataset.edge = edge(e); });
+stage.addEventListener("mouseleave", () => { stage.dataset.edge = ""; });
+stage.addEventListener("click", (e) => {
+  const side = edge(e);
+  if (side) show(current + (side === "left" ? -1 : 1));
+});
+
+show(0);
+</script>
+</div>
+</main>
+</body>
+</html>
